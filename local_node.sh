@@ -1,10 +1,10 @@
 #!/bin/bash
 
 KEYS[0]="dev0"
-KEYS[1]="dev1"
-KEYS[2]="dev2"
-CHAINID="evmos_9000-1"
-MONIKER="localtestnet"
+#KEYS[1]="dev1"
+#KEYS[2]="dev2"
+CHAINID="evmos_9001-2"
+MONIKER="localhost"
 # Remember to change to other types of keyring like 'file' in-case exposing to outside world,
 # otherwise your balance will be wiped quickly
 # The keyring test does not require private key to steal tokens from you
@@ -87,6 +87,9 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	# Claim module account:
 	# 0xA61808Fe40fEb8B3433778BBC2ecECCAA47c8c47 || evmos15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz
 	jq -r --arg amount_to_claim "$amount_to_claim" '.app_state["bank"]["balances"] += [{"address":"evmos15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz","coins":[{"denom":"aevmos", "amount":$amount_to_claim}]}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+
+  # shorten voting_period to 5 min
+  jq '.app_state["gov"]["voting_params"]["voting_period"]="300s"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 	if [[ $1 == "pending" ]]; then
 		if [[ "$OSTYPE" == "darwin"* ]]; then
