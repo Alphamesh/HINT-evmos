@@ -19,7 +19,7 @@ func TestInitCmd(t *testing.T) {
 		"init",       // Test the init cmd
 		"evmos-test", // Moniker
 		fmt.Sprintf("--%s=%s", cli.FlagOverwrite, "true"), // Overwrite genesis.json, in case it already exists
-		fmt.Sprintf("--%s=%s", flags.FlagChainID, "evmos_9000-1"),
+		fmt.Sprintf("--%s=%s", flags.FlagChainID, "evmos_9001-2"),
 	})
 
 	err := svrcmd.Execute(rootCmd, "evmosd", app.DefaultNodeHome)

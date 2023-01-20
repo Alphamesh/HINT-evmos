@@ -48,7 +48,7 @@ When working with the `local_node.sh` script, it is necessary to extend all `evm
  $ export TMP=$HOME/.tmp-evmosd`
  $ evmosd config --home $TMP
 {
-	"chain-id": "evmos_9000-1",
+	"chain-id": "evmos_9001-2",
 	"keyring-backend": "test",
 	"output": "text",
 	"node": "tcp://localhost:26657",

@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"encoding/json"
+	"fmt"
 	"math/big"
 
 	errorsmod "cosmossdk.io/errors"
@@ -50,12 +51,15 @@ func (k Keeper) DeployERC20Contract(
 		return common.Address{}, err
 	}
 
+	fmt.Printf("----DEBUG DeployERC20Contract.CreateAddress----\n")
 	contractAddr := crypto.CreateAddress(types.ModuleAddress, nonce)
 	_, err = k.CallEVMWithData(ctx, types.ModuleAddress, nil, data, true)
 	if err != nil {
+		fmt.Printf("----DEBUG DeployERC20Contract.CreateAddress err %s----\n", err.Error())
 		return common.Address{}, errorsmod.Wrapf(err, "failed to deploy contract for %s", coinMetadata.Name)
 	}
 
+	fmt.Printf("----DEBUG DeployERC20Contract.CreateAddress----\n")
 	return contractAddr, nil
 }
 

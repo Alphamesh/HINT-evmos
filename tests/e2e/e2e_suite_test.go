@@ -16,7 +16,7 @@ import (
 const (
 	localRepository       = "evmos"
 	localVersionTag       = "latest"
-	defaultChainID        = "evmos_9000-1"
+	defaultChainID        = "evmos_9001-2"
 	defaultManagerNetwork = "evmos-local"
 	tharsisRepo           = "tharsishq/evmos"
 	firstUpgradeHeight    = 50

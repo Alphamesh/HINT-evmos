@@ -1,10 +1,10 @@
 #!/bin/bash
 
 KEYS[0]="dev0"
-#KEYS[1]="dev1"
-#KEYS[2]="dev2"
+KEYS[1]="dev1"
+KEYS[2]="dev2"
 CHAINID="evmos_9001-2"
-MONIKER="localhost"
+MONIKER="localtestnet"
 # Remember to change to other types of keyring like 'file' in-case exposing to outside world,
 # otherwise your balance will be wiped quickly
 # The keyring test does not require private key to steal tokens from you
@@ -76,6 +76,7 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 
 	# Set claims records for validator account
 	amount_to_claim=10000
+	uhusdc_to_claim=1000000000000000000000000
 	claims_key=${KEYS[0]}
 	node_address=$(evmosd keys show $claims_key --keyring-backend $KEYRING --home "$HOMEDIR" | grep "address" | cut -c12-)
 	jq -r --arg node_address "$node_address" --arg amount_to_claim "$amount_to_claim" '.app_state["claims"]["claims_records"]=[{"initial_claimable_amount":$amount_to_claim, "actions_completed":[false, false, false, false],"address":$node_address}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
@@ -87,8 +88,10 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	# Claim module account:
 	# 0xA61808Fe40fEb8B3433778BBC2ecECCAA47c8c47 || evmos15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz
 	jq -r --arg amount_to_claim "$amount_to_claim" '.app_state["bank"]["balances"] += [{"address":"evmos15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz","coins":[{"denom":"aevmos", "amount":$amount_to_claim}]}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq -r --arg uhusdc_to_claim "$uhusdc_to_claim" '.app_state["bank"]["balances"] += [{"address":"evmos1cusxgx30wkqvufmw8se5xmefjqmzj3tcwvk0xv","coins":[{"denom":"uhusdc", "amount":$uhusdc_to_claim}]}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq -r '.app_state["bank"]["denom_metadata"] += [{"name":"uhusdc","symbol":"uhusdc","description":"bridged USDC.","denom_units":[{"denom":"uhusdc","exponent":0,"aliases":["wei"]},{"denom":"husdc","exponent":6}],"base":"uhusdc","display":"uhusdc"}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
-  # shorten voting_period to 5 min
+	# shorten voting_period to 5 min
   jq '.app_state["gov"]["voting_params"]["voting_period"]="300s"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 	if [[ $1 == "pending" ]]; then
@@ -121,6 +124,7 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	# bc is required to add these big numbers
 	total_supply=$(echo "${#KEYS[@]} * 100000000000000000000000000 + $amount_to_claim" | bc)
 	jq -r --arg total_supply "$total_supply" '.app_state["bank"]["supply"][0]["amount"]=$total_supply' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq -r --arg uhusdc_to_claim "$uhusdc_to_claim" '.app_state["bank"]["supply"] += [{"denom":"uhusdc","amount":$uhusdc_to_claim}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 	# Sign genesis transaction
 	evmosd gentx ${KEYS[0]} 1000000000000000000000aevmos --keyring-backend $KEYRING --chain-id $CHAINID --home "$HOMEDIR"

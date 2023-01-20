@@ -1,0 +1,29 @@
+{
+  "metadata": [
+    {
+      "description": "Bridged BTC",
+      "denom_units": [
+        {
+          "denom": "uhbtc",
+          "exponent": 0,
+          "aliases": [
+            "wei"
+          ]
+        },
+        {
+          "denom": "HBTC",
+          "exponent": 18
+        }
+      ],
+      "base": "uhbtc",
+      "display": "HBTC",
+      "name": "HINT BTC",
+      "symbol": "HBTC",
+      "uri": "",
+      "uri_hash": ""
+    }
+  ]
+}
+
+
+

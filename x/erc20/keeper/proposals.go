@@ -2,11 +2,11 @@ package keeper
 
 import (
 	errorsmod "cosmossdk.io/errors"
+	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/ethereum/go-ethereum/common"
-
 	"github.com/evmos/evmos/v10/x/erc20/types"
 )
 
@@ -24,29 +24,44 @@ func (k Keeper) RegisterCoin(
 	}
 
 	// Check if the coin exists by ensuring the supply is set
+	fmt.Printf("----DEBUG RegisterCoin.HasSupply----\n")
 	if !k.bankKeeper.HasSupply(ctx, coinMetadata.Base) {
-		return nil, errorsmod.Wrapf(
-			errortypes.ErrInvalidCoins, "base denomination '%s' cannot have a supply of 0", coinMetadata.Base,
-		)
+		// Register the coin if not exists
+		k.bankKeeper.SetDenomMetaData(ctx, coinMetadata)
+		// mint 1 coin to erc20 module to make sure HasSupply check passes
+		err := k.bankKeeper.MintCoins(ctx, types.ModuleName, sdk.NewCoins(sdk.NewCoin(coinMetadata.Base, sdk.NewInt(1))))
+
+		if err != nil {
+			return nil, errorsmod.Wrapf(
+				errortypes.ErrInvalidCoins, "base denomination '%s' cannot have a supply of 0", coinMetadata.Base,
+			)
+		}
 	}
 
+	fmt.Printf("----DEBUG RegisterCoin.verifyMetadata----\n")
 	if err := k.verifyMetadata(ctx, coinMetadata); err != nil {
 		return nil, errorsmod.Wrapf(
 			types.ErrInternalTokenPair, "coin metadata is invalid %s", coinMetadata.Name,
 		)
 	}
 
+	fmt.Printf("----DEBUG RegisterCoin.DeployERC20Contract----\n")
 	addr, err := k.DeployERC20Contract(ctx, coinMetadata)
 	if err != nil {
+		fmt.Printf("----DEBUG RegisterCoin.DeployERC20Contract err %s----\n", err)
 		return nil, errorsmod.Wrap(
 			err, "failed to create wrapped coin denom metadata for ERC20",
 		)
 	}
 
+	fmt.Printf("----DEBUG RegisterCoin.DeployERC20Contract success----\n")
 	pair := types.NewTokenPair(addr, coinMetadata.Base, true, types.OWNER_MODULE)
 	k.SetTokenPair(ctx, pair)
+	fmt.Printf("----DEBUG RegisterCoin.SetTokenPair----\n")
 	k.SetDenomMap(ctx, pair.Denom, pair.GetID())
+	fmt.Printf("----DEBUG RegisterCoin.SetDenomMap----\n")
 	k.SetERC20Map(ctx, common.HexToAddress(pair.Erc20Address), pair.GetID())
+	fmt.Printf("----DEBUG RegisterCoin.SetERC20Map----\n")
 
 	return &pair, nil
 }

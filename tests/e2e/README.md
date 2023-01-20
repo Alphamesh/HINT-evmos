@@ -29,7 +29,7 @@ TARGET_VERSION
 MOUNT_PATH
 
 # '--chain-id' evmos cli parameter, used to start nodes with specific chain-id and submit proposals
-# by default 'evmos_9000-1'
+# by default 'evmos_9001-2'
 CHAIN_ID
 ```
 

@@ -17,7 +17,7 @@ RPC_PORT="854"
 IP_ADDR="0.0.0.0"
 
 KEY="dev0"
-CHAINID="evmos_9000-1"
+CHAINID="evmos_9001-2"
 MONIKER="mymoniker"
 
 ## default port prefixes for evmosd

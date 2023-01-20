@@ -1,0 +1,48 @@
+syntax = "proto3";
+package evmos.coin;
+
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "evmos/x/coin/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc Deposit(MsgDeposit) returns (MsgDepositResponse);
+  rpc Withdraw(MsgWithdraw) returns (MsgWithdrawResponse);
+  rpc Transfer(MsgTransfer) returns (MsgTransferResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgDeposit {
+  string creator = 1;
+  string account = 2;
+  string denom = 3;
+  string amount = 4;
+}
+
+message MsgDepositResponse {
+}
+
+message MsgWithdraw {
+  string creator = 1;
+  string account = 2;
+  string denom = 3;
+  string amount = 4;
+}
+
+message MsgWithdrawResponse {
+  string remainingAmount = 1;
+}
+
+message MsgTransfer {
+  string creator = 1;
+  string from = 2;
+  string to = 3;
+  string denom = 4;
+  string amount = 5;
+}
+
+message MsgTransferResponse {
+}
+
+// this line is used by starport scaffolding # proto/tx/message

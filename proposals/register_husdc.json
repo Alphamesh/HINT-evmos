@@ -1,0 +1,26 @@
+{
+  "metadata": [
+    {
+      "description": "bridged USDC.",
+      "denom_units": [
+        {
+          "denom": "uhusdc",
+          "exponent": 0,
+          "aliases": [
+            "wei"
+          ]
+        },
+        {
+          "denom": "husdc",
+          "exponent": 6
+        }
+      ],
+      "base": "uhusdc",
+      "display": "uhusdc",
+      "name": "uhusdc",
+      "symbol": "uhusdc",
+      "uri": "",
+      "uri_hash": ""
+    }
+  ]
+}
