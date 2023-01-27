@@ -52,8 +52,8 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 
 	# If keys exist they should be deleted
 	for KEY in "${KEYS[@]}"; do
-	  echo 'cloth kitten cereal purchase marble together smile actual often climb scare quarter tornado immune crystal method patrol dynamic cannon cruel moral laptop ostrich collect' | evmosd keys add $KEY --recover
-#		evmosd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO --home "$HOMEDIR"
+#	  echo "cloth kitten cereal purchase marble together smile actual often climb scare quarter tornado immune crystal method patrol dynamic cannon cruel moral laptop ostrich collect" | evmosd keys add $KEY --recover
+		evmosd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO --home "$HOMEDIR"
 	done
 
 	# Set moniker and chain-id for Evmos (Moniker can be anything, chain-id must be an integer)
