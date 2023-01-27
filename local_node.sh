@@ -1,8 +1,6 @@
 #!/bin/bash
 
-KEYS[0]="dev0"
-KEYS[1]="dev1"
-KEYS[2]="dev2"
+KEYS[0]="curry"
 CHAINID="evmos_9001-2"
 MONIKER="localtestnet"
 # Remember to change to other types of keyring like 'file' in-case exposing to outside world,
@@ -54,7 +52,8 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 
 	# If keys exist they should be deleted
 	for KEY in "${KEYS[@]}"; do
-		evmosd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO --home "$HOMEDIR"
+	  echo "cloth kitten cereal purchase marble together smile actual often climb scare quarter tornado immune crystal method patrol dynamic cannon cruel moral laptop ostrich collect" | evmosd keys add $KEY --recover
+#		evmosd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO --home "$HOMEDIR"
 	done
 
 	# Set moniker and chain-id for Evmos (Moniker can be anything, chain-id must be an integer)
@@ -147,4 +146,4 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 fi
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-evmosd start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --minimum-gas-prices=0.0001aevmos --json-rpc.enable=true --json-rpc.api eth,txpool,personal,net,debug,web3 --api.enable --home "$HOMEDIR"
+evmosd start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --minimum-gas-prices=0.0001aevmos --json-rpc.enable --rpc.laddr tcp://0.0.0.0:26657 --json-rpc.api eth,txpool,personal,net,debug,web3 --api.enable --home "$HOMEDIR"
