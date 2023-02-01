@@ -51,10 +51,11 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	evmosd config chain-id $CHAINID --home "$HOMEDIR"
 
 	# If keys exist they should be deleted
-	for KEY in "${KEYS[@]}"; do
-#	  echo "cloth kitten cereal purchase marble together smile actual often climb scare quarter tornado immune crystal method patrol dynamic cannon cruel moral laptop ostrich collect" | evmosd keys add $KEY --recover
-		evmosd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO --home "$HOMEDIR"
-	done
+#	for KEY in "${KEYS[@]}"; do
+#		evmosd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO --home "$HOMEDIR"
+#	done
+
+  echo "cloth kitten cereal purchase marble together smile actual often climb scare quarter tornado immune crystal method patrol dynamic cannon cruel moral laptop ostrich collect" | evmosd keys add curry --recover --keyring-backend $KEYRING --home "$HOMEDIR"
 
 	# Set moniker and chain-id for Evmos (Moniker can be anything, chain-id must be an integer)
 	evmosd init $MONIKER -o --chain-id $CHAINID --home "$HOMEDIR"
@@ -87,7 +88,7 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	# Claim module account:
 	# 0xA61808Fe40fEb8B3433778BBC2ecECCAA47c8c47 || evmos15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz
 	jq -r --arg amount_to_claim "$amount_to_claim" '.app_state["bank"]["balances"] += [{"address":"evmos15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz","coins":[{"denom":"aevmos", "amount":$amount_to_claim}]}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
-	jq -r --arg uhusdc_to_claim "$uhusdc_to_claim" '.app_state["bank"]["balances"] += [{"address":"evmos1cusxgx30wkqvufmw8se5xmefjqmzj3tcwvk0xv","coins":[{"denom":"uhusdc", "amount":$uhusdc_to_claim}]}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq -r --arg uhusdc_to_claim "$uhusdc_to_claim" '.app_state["bank"]["balances"] += [{"address":"evmos182xdrsa6uzgm5xqj26z9kwh9j6flzgs8upct0e","coins":[{"denom":"uhusdc", "amount":$uhusdc_to_claim}]}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 	jq -r '.app_state["bank"]["denom_metadata"] += [{"name":"uhusdc","symbol":"uhusdc","description":"bridged USDC.","denom_units":[{"denom":"uhusdc","exponent":0,"aliases":["wei"]},{"denom":"husdc","exponent":6}],"base":"uhusdc","display":"uhusdc"}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 	# shorten voting_period to 5 min

@@ -1,0 +1,29 @@
+{
+  "metadata": [
+    {
+      "description": "Bridged ETH",
+      "denom_units": [
+        {
+          "denom": "uheth",
+          "exponent": 0,
+          "aliases": [
+            "wei"
+          ]
+        },
+        {
+          "denom": "HETH",
+          "exponent": 18
+        }
+      ],
+      "base": "uheth",
+      "display": "HETH",
+      "name": "HINT ETH",
+      "symbol": "HETH",
+      "uri": "",
+      "uri_hash": ""
+    }
+  ]
+}
+
+
+
