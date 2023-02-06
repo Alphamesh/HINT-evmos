@@ -1,0 +1,29 @@
+{
+  "metadata": [
+    {
+      "description": "Bridged BBTC from BSC.",
+      "denom_units": [
+        {
+          "denom": "uhbbtc",
+          "exponent": 0,
+          "aliases": [
+            "wei"
+          ]
+        },
+        {
+          "denom": "HBBTC",
+          "exponent": 18
+        }
+      ],
+      "base": "uhbbtc",
+      "display": "HBBTC",
+      "name": "HINT BBTC from BSC",
+      "symbol": "HBBTC",
+      "uri": "",
+      "uri_hash": ""
+    }
+  ]
+}
+
+
+

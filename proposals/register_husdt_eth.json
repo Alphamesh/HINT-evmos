@@ -1,7 +1,7 @@
 {
   "metadata": [
     {
-      "description": "bridged USDC.",
+      "description": "bridged USDC from Ethereum.",
       "denom_units": [
         {
           "denom": "uhusdc",
@@ -11,14 +11,14 @@
           ]
         },
         {
-          "denom": "husdc",
+          "denom": "HUSDC",
           "exponent": 6
         }
       ],
       "base": "uhusdc",
-      "display": "uhusdc",
-      "name": "uhusdc",
-      "symbol": "uhusdc",
+      "display": "HUSDC",
+      "name": "HINT USDT from Ethereum",
+      "symbol": "HUSDC",
       "uri": "",
       "uri_hash": ""
     }

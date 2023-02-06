@@ -1,0 +1,29 @@
+{
+  "metadata": [
+    {
+      "description": "Bridged BNB from BSC.",
+      "denom_units": [
+        {
+          "denom": "uhbnb",
+          "exponent": 0,
+          "aliases": [
+            "wei"
+          ]
+        },
+        {
+          "denom": "HBNB",
+          "exponent": 18
+        }
+      ],
+      "base": "uhbnb",
+      "display": "HBNB",
+      "name": "HINT BNB",
+      "symbol": "HBNB",
+      "uri": "",
+      "uri_hash": ""
+    }
+  ]
+}
+
+
+

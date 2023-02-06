@@ -1,24 +1,24 @@
 {
   "metadata": [
     {
-      "description": "Bridged ETH",
+      "description": "Bridged WETH from BSC.",
       "denom_units": [
         {
-          "denom": "uheth",
+          "denom": "uhweth",
           "exponent": 0,
           "aliases": [
             "wei"
           ]
         },
         {
-          "denom": "HETH",
+          "denom": "HWETH",
           "exponent": 18
         }
       ],
-      "base": "uheth",
-      "display": "HETH",
-      "name": "HINT ETH",
-      "symbol": "HETH",
+      "base": "uhweth",
+      "display": "HWETH",
+      "name": "HINT WETH from BSC",
+      "symbol": "HWETH",
       "uri": "",
       "uri_hash": ""
     }

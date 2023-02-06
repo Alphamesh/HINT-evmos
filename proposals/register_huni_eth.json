@@ -1,29 +1,26 @@
 {
   "metadata": [
     {
-      "description": "Bridged BTC",
+      "description": "bridged Uniswap from Ethereum.",
       "denom_units": [
         {
-          "denom": "uhbtc",
+          "denom": "uhuni",
           "exponent": 0,
           "aliases": [
             "wei"
           ]
         },
         {
-          "denom": "HBTC",
+          "denom": "HUNI",
           "exponent": 18
         }
       ],
-      "base": "uhbtc",
-      "display": "HBTC",
-      "name": "HINT BTC",
-      "symbol": "HBTC",
+      "base": "uhuni",
+      "display": "HUNI",
+      "name": "HINT UNI from Ethereum",
+      "symbol": "HUNI",
       "uri": "",
       "uri_hash": ""
     }
   ]
 }
-
-
-
