@@ -1,24 +1,24 @@
 {
   "metadata": [
     {
-      "description": "bridged USDC from Ethereum.",
+      "description": "bridged USDT from Ethereum.",
       "denom_units": [
         {
-          "denom": "uhusdc",
+          "denom": "uhusdt",
           "exponent": 0,
           "aliases": [
             "wei"
           ]
         },
         {
-          "denom": "HUSDC",
+          "denom": "HUSDT",
           "exponent": 6
         }
       ],
-      "base": "uhusdc",
-      "display": "HUSDC",
+      "base": "uhusdt",
+      "display": "HUSDT",
       "name": "HINT USDT from Ethereum",
-      "symbol": "HUSDC",
+      "symbol": "HUSDT",
       "uri": "",
       "uri_hash": ""
     }
