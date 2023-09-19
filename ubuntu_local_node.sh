@@ -36,7 +36,8 @@ make install
 if [ -d "$HOMEDIR" ]; then
 	printf "\nAn existing folder at '%s' was found. You can choose to delete this folder and start a new local node with new keys from genesis. When declined, the existing local node is started. \n" "$HOMEDIR"
 	echo "Overwrite the existing configuration and start a new local node? [y/n]"
-	read -r overwrite
+  overwrite="n"
+#	read -r overwrite
 else
 	overwrite="Y"
 fi
@@ -147,4 +148,4 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 fi
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-evmosd start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --minimum-gas-prices=0.0001aevmos --json-rpc.enable --rpc.laddr tcp://0.0.0.0:26657 --json-rpc.api eth,txpool,personal,net,debug,web3 --api.enable --home "$HOMEDIR"
+/home/ubuntu/go/bin/evmosd start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --minimum-gas-prices=0.0001aevmos --json-rpc.enable --rpc.laddr tcp://0.0.0.0:26657 --json-rpc.api eth,txpool,personal,net,debug,web3 --api.enable --home "$HOMEDIR"
